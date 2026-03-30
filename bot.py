@@ -22,6 +22,17 @@ async def send_friday():
 
 async def main():
     scheduler = AsyncIOScheduler(timezone="Asia/Ho_Chi_Minh")
+    from datetime import datetime, timedelta
+
+async def test_message():
+    await bot.send_message(
+        chat_id=CHAT_ID,
+        text="✅ Test thành công! Bot đang hoạt động."
+    )
+
+# Chạy sau 60 giây
+run_time = datetime.now() + timedelta(seconds=60)
+scheduler.add_job(test_message, 'date', run_date=run_time)
 
     scheduler.add_job(send_tuesday, 'cron', day_of_week='tue', hour=11, minute=30)
     scheduler.add_job(send_friday, 'cron', day_of_week='fri', hour=16, minute=30)
